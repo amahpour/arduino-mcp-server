@@ -5,20 +5,24 @@ description = "A robust, secure, and extensible MCP server for Arduino using JSO
 authors = ["Your Name <your@email.com>"]
 package-mode = false
 packages = [
-    { include = "mcp_server", from = "src" }
+    { include = "mcp_server", from = "src" },
+    { include = "arduino_mcp_server", from = "src" }
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4.0"
+python = ">=3.10,<4.0"
 pyserial = "^3.5"
+mcp = {extras = ["cli"], version = "^1.12.0"}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0"
 pytest-mock = "^3.14"
 
 [tool.poetry.scripts]
-test-unit = "pytest tests/unit --maxfail=1 --disable-warnings -v"
-test-integration = "pytest tests/integration --maxfail=1 --disable-warnings -v"
+arduino-mcp-server = "arduino_mcp_server.server:ArduinoServer.run_cli"
+
+[tool.poetry.plugins."mcp.servers"]
+arduino = "arduino_mcp_server.server:ArduinoServer"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
