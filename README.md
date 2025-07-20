@@ -72,9 +72,14 @@ graph TD;
 ## Usage
 
 ### CLI
-Run the server and send requests via pipes:
+Run the server directly:
 ```bash
-echo '{"jsonrpc": "2.0", "id": 1, "method": "list_ports", "params": {}}' | poetry run python -m arduino_mcp_server.server
+poetry run arduino-mcp-server
+```
+
+For testing with JSON-RPC requests:
+```bash
+echo '{"jsonrpc": "2.0", "id": 1, "method": "list_ports", "params": {}}' | poetry run arduino-mcp-server
 ```
 
 ### VSCode/Cursor/Claude Desktop Integration
@@ -106,7 +111,7 @@ You can use Python, Node.js, or any language to send JSON-RPC requests to the MC
 import subprocess
 import json
 req = {"jsonrpc": "2.0", "id": 1, "method": "list_ports", "params": {}}
-proc = subprocess.Popen(["poetry", "run", "python", "-m", "arduino_mcp_server.server"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+proc = subprocess.Popen(["poetry", "run", "arduino-mcp-server"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
 stdout, _ = proc.communicate(json.dumps(req) + "\n")
 print(json.loads(stdout))
 ```
@@ -142,12 +147,11 @@ docker run --rm --device=/dev/ttyACM0 --env LOG_LEVEL=INFO arduino-mcp-server
     "id": 1
   }
   ```
-- **Actions:**
+- **Available Tools:**
   - `list_ports`: List available serial ports
   - `compile`: Compile a sketch
   - `upload`: Upload a compiled sketch
   - `serial_send`: Send a message over serial and receive a response
-  - `read_serial`: Read lines from serial port with overall timeout
 
 ## Testing
 
@@ -155,7 +159,7 @@ docker run --rm --device=/dev/ttyACM0 --env LOG_LEVEL=INFO arduino-mcp-server
 - Located in `tests/unit/`
 - Run with:
   ```bash
-  poetry run test-unit
+  poetry run pytest tests/unit/
   ```
 - Fast, require no hardware (use mocks)
 
@@ -163,14 +167,12 @@ docker run --rm --device=/dev/ttyACM0 --env LOG_LEVEL=INFO arduino-mcp-server
 - Located in `tests/integration/`
 - Run with:
   ```bash
-  poetry run test-integration
+  poetry run pytest tests/integration/
   ```
 - Require a connected Arduino and real sketches
 
 ## Example Arduino Sketches
-- `sketches/echo_serial/echo_serial.ino`: Echoes serial input with a unique prefix
-- `sketches/status_reporter/status_reporter.ino`: Periodically prints status messages
-- `sketches/command_feedback/command_feedback.ino`: Responds to commands with unique feedback
+- `sketches/blink/blink.ino`: Basic LED blink example for testing
 
 ## Troubleshooting
 - **Poetry not found:** Install with the command above
