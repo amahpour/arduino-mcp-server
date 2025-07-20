@@ -36,7 +36,7 @@ The MCP server provides a secure, scriptable, and extensible interface for compi
 ## Architecture
 
 - **Language:** Python 3.10+
-- **Dependency Management:** Poetry
+- **Dependency Management:** Poetry (`pyproject.toml`)
 - **Project Layout:**
   - `src/arduino_mcp_server/` — Main server code (FastMCP-based)
   - `sketches/` — Example/test Arduino sketches

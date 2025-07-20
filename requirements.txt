@@ -1,3 +1,0 @@
-pyserial
-# For JSON-RPC 2.0, no extra package required for basic server
-pytest 
