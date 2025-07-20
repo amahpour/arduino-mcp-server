@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Poetry
+.poetry/
+*.lock
+
+# Virtualenv
+.venv/
+venv/
+ENV/
+
+# Test cache
+.pytest_cache/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Arduino
+*.hex
+*.elf
+*.bin
+*.eep
+*.map
+*.dmp
+*.log
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Misc
+*.swp
+*.swo 

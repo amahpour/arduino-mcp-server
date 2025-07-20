@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "arduino-mcp-server"
+version = "1.0.0"
+description = "A robust, secure, and extensible MCP server for Arduino using JSON-RPC 2.0."
+authors = ["Your Name <your@email.com>"]
+package-mode = false
+packages = [
+    { include = "mcp_server", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<4.0"
+pyserial = "^3.5"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+pytest-mock = "^3.14"
+
+[tool.poetry.scripts]
+test-unit = "pytest tests/unit --maxfail=1 --disable-warnings -v"
+test-integration = "pytest tests/integration --maxfail=1 --disable-warnings -v"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api" 
